@@ -5,21 +5,25 @@ const url =
 const client = new MongoClient(url);
 
 const dbName = "HelloWorld";
+const dbName1 = "Testing1"
 
 async function main() {
   // Use connect method to connect to the server
   await client.connect();
   console.log("Connected successfully to server");
-  const db = client.db(dbName);
-  const collection = db.collection("user");
+  const db = client.db(dbName1);
+  const collection = db.collection("user1");
 
   //Read
   const findResult = await collection.find({}).toArray();
   console.log("Found documents =>", findResult);
 
   // Index
-  // const indexName = await collection.createIndex({ firstName: "Yajiv" });
+  // const indexName = await collection.createIndex({ firstName: 1 });
   // console.log("index name =", indexName);
+
+
+  
 
   //update
   // const updateResult = await collection.updateOne(
@@ -28,7 +32,7 @@ async function main() {
   // );
   // console.log("Updated documents =>", updateResult);
 
-  //Insert
+  // //Insert
   // const insertResult = await collection.insertMany([
   //   {
   //     firstName: "Yajiv",
@@ -40,13 +44,13 @@ async function main() {
   // console.log("Inserted documents =>", insertResult);
 
   //DELETE
-  //
-  // const deleteResult = await collection.deleteMany({
-  //   PhoneNumber: "88888888888",
-  // });
-  // console.log("Deleted documents =>", deleteResult);
+  
+  const deleteResult = await collection.deleteMany({
+    PhoneNumber: "88888888888",
+  });
+  console.log("Deleted documents =>", deleteResult);
   const countResult = await collection.countDocuments({});
-  console.log("count of documents in the user collection : ", countResult)
+  console.log("count of documents in the user1 collection : ", countResult)
   return "done.";
 }
 main()
